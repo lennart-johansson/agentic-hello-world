@@ -3,84 +3,283 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ode to the Giraffe</title>
+  <title>The Giraffe Gang</title>
   <style>
-    * {
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    :root {
+      --bg:          #0d1117;
+      --surface:     #161b22;
+      --border:      #30363d;
+      --gold:        #e6a817;
+      --gold-light:  #f5c842;
+      --text:        #c9d1d9;
+      --text-muted:  #8b949e;
+      --accent:      #b35c00;
+    }
+
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: #0d1117;
+      background: var(--bg);
       font-family: 'Segoe UI', system-ui, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
     }
 
-    .card {
+    /* ── HERO ── */
+    .hero {
       text-align: center;
-      padding: 3rem 4rem;
-      background: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      max-width: 560px;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #1a1200 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
     }
 
-    h1 {
-      font-size: 2.2rem;
-      color: #e6a817;
-      letter-spacing: -0.5px;
-      margin-bottom: 1.8rem;
+    .hero-eyebrow {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
     }
 
-    .poem {
-      color: #c9d1d9;
-      font-size: 1.05rem;
-      line-height: 1.9;
-      font-style: italic;
-      text-align: left;
-    }
-
-    .poem p {
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      color: var(--gold-light);
+      letter-spacing: -1px;
+      line-height: 1.1;
       margin-bottom: 1rem;
     }
 
-    img {
-      margin-top: 2rem;
-      max-width: 100%;
-      border-radius: 8px;
-      width: 320px;
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── CARDS GRID ── */
+    .gang {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1080px;
+      margin: 3rem auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    /* ── INDIVIDUAL CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      overflow: hidden;
+      background: #1a1200;
+      height: 280px;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover .card-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .card-body {
+      padding: 1.6rem 1.8rem 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .card-name {
+      font-size: 1.8rem;
+      color: var(--gold-light);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .card-tagline {
+      font-size: 0.9rem;
+      color: var(--gold);
+      font-style: italic;
+      margin-top: -0.5rem;
+    }
+
+    .stats {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .stat {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 0.5rem;
+      align-items: baseline;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .stat-label {
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .stat-value {
+      color: var(--text);
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0.25rem 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Ode to the Giraffe</h1>
-    <div class="poem">
-      <p>
-        Tall against the amber sky,<br>
-        You reach where other creatures shy,<br>
-        With neck like a tower, proud and fine,<br>
-        You touch the tops of the acacia line.
-      </p>
-      <p>
-        Your coat is a map of golden brown,<br>
-        A patchwork robe, a living crown,<br>
-        You stride across the open plain,<br>
-        Where wind and silence softly reign.
-      </p>
-      <p>
-        No creature stands as tall as you,<br>
-        No eyes see more of morning's dew,<br>
-        You drink the sun before the rest,<br>
-        And prove that height is nature's best.
-      </p>
-    </div>
-    <img src="giraffe.png" alt="A majestic giraffe" />
-  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <p class="hero-eyebrow">Est. somewhere on the savanna</p>
+    <h1>Meet the Gang</h1>
+    <p>Three legends of the African plains. Long necks, big personalities, zero patience for short trees.</p>
+  </header>
+
+  <!-- PROFILE CARDS -->
+  <section class="gang">
+
+    <!-- ARLO -->
+    <article class="card">
+      <div class="card-img-wrap">
+        <img src="arlo.png" alt="Arlo — the gentle giant of the gang" />
+      </div>
+      <div class="card-body">
+        <h2 class="card-name">Arlo</h2>
+        <p class="card-tagline">"The Gentle Giant"</p>
+        <div class="divider"></div>
+        <dl class="stats">
+          <div class="stat">
+            <dt class="stat-label">Origin</dt>
+            <dd class="stat-value">Northern Serengeti, Tanzania — born at sunrise near the Grumeti River</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-label">Diet</dt>
+            <dd class="stat-value">Strictly acacia leaves, young shoots, and the occasional wild fig when no one's watching</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-label">Temperament</dt>
+            <dd class="stat-value">Patient and thoughtful. Arlo never rushes — except when there are figs involved</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-label">Appearance</dt>
+            <dd class="stat-value">Warm amber patches, a long dark mane, and the most expressive eyes on the savanna</dd>
+          </div>
+        </dl>
+      </div>
+    </article>
+
+    <!-- BRUTO -->
+    <article class="card">
+      <div class="card-img-wrap">
+        <img src="bruto.png" alt="Bruto — the bold adventurer of the gang" />
+      </div>
+      <div class="card-body">
+        <h2 class="card-name">Bruto</h2>
+        <p class="card-tagline">"The Bold Adventurer"</p>
+        <div class="divider"></div>
+        <dl class="stats">
+          <div class="stat">
+            <dt class="stat-label">Origin</dt>
+            <dd class="stat-value">Masai Mara, Kenya — raised near the Mara River where he once stared down a hippo</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-label">Diet</dt>
+            <dd class="stat-value">Anything tall enough to be a challenge. Thorny branches are just a bonus crunch</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-label">Temperament</dt>
+            <dd class="stat-value">Bold, headstrong, and always first to check out anything new. Basically a 5-metre golden retriever</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-label">Appearance</dt>
+            <dd class="stat-value">Deep russet patches, a broad chest, and an impressive set of ossicones that he's very proud of</dd>
+          </div>
+        </dl>
+      </div>
+    </article>
+
+    <!-- SPOTTY -->
+    <article class="card">
+      <div class="card-img-wrap">
+        <img src="spotty.png" alt="Spotty — the social butterfly of the gang" />
+      </div>
+      <div class="card-body">
+        <h2 class="card-name">Spotty</h2>
+        <p class="card-tagline">"The Social Butterfly"</p>
+        <div class="divider"></div>
+        <dl class="stats">
+          <div class="stat">
+            <dt class="stat-label">Origin</dt>
+            <dd class="stat-value">Okavango Delta, Botswana — the most photogenic corner of the continent</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-label">Diet</dt>
+            <dd class="stat-value">Acacia, baobab blossoms, and dew-kissed leaves collected before sunrise like a true connoisseur</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-label">Temperament</dt>
+            <dd class="stat-value">Charismatic and endlessly curious. Spotty knows every animal on the plains — and their gossip</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-label">Appearance</dt>
+            <dd class="stat-value">Perfectly symmetrical cream-and-chestnut spots, a graceful neck, and a swishy tail she uses to dramatic effect</dd>
+          </div>
+        </dl>
+      </div>
+    </article>
+
+  </section>
+
+  <footer>
+    The Giraffe Gang &mdash; roaming free since forever
+  </footer>
+
 </body>
 </html>
